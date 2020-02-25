@@ -14,6 +14,7 @@ namespace SymmetricBlockCiphers
     public partial class EncoderForm : Form
     {
         private ICipher cipher;
+        private CipherMode cipherMode;
 
         public EncoderForm()
         {
@@ -22,10 +23,27 @@ namespace SymmetricBlockCiphers
             cbCipherMode.SelectedIndex = 0;
         }
 
-        private void bEncode_Click(object sender, EventArgs e)
+        private void InitCipher()
         {
-            CipherMode cipherMode = (CipherMode)Enum.Parse(typeof(CipherMode), cbCipherMode.SelectedItem.ToString());
-            
+            cipherMode = (CipherMode)Enum.Parse(typeof(CipherMode), cbCipherMode.SelectedItem.ToString());
+            if (cbCipher.SelectedItem.ToString() == "DES")
+                cipher = new DESCipher(cipherMode);
+        }
+
+        private void bEncrypt_Click(object sender, EventArgs e)
+        {
+            InitCipher();
+
+            //var bytes = cipher.Encrypt(tbDecodedText.Text);
+            //var decrypted = cipher.Decrypt(bytes);
+
+            tbEnctyptedText.Text = cipher.Encrypt(tbDecryptedText.Text);
+        }
+
+        private void bDecrypt_Click(object sender, EventArgs e)
+        {
+            InitCipher();
+            tbDecryptedText.Text = cipher.Decrypt(tbEnctyptedText.Text);
         }
     }
 }
