@@ -8,8 +8,8 @@ namespace SymmetricBlockCiphers
 {
     public interface ICipher
     {
-        //byte[] Encrypt_(string d);
-        //string Decrypt(byte[] data);
+        byte[] Encrypt(byte[] data);
+        byte[] Decrypt(byte[] data);
 
         string Encrypt(string data);
         string Decrypt(string data);
