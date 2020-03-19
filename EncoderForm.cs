@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 
@@ -11,12 +12,15 @@ namespace SymmetricBlockCiphers
         private CipherMode cipherMode;
         private BitmapConverter bitmapConverter;
 
+        private const string file = "data.txt";
+
         public EncoderForm()
         {
             InitializeComponent();
             cbCipherMode.SelectedIndex = 0;
             cbCipher.SelectedIndex = 0;
             bitmapConverter = new BitmapConverter();
+
         }
 
         private void InitCipher()
@@ -62,11 +66,12 @@ namespace SymmetricBlockCiphers
             byte[] bytes = bitmapConverter.ImageToBytes(new Bitmap(pbPlainImg.Image));
             byte[] encrypted = cipher.Encrypt(bytes);
             pbEncryptedImg.Image = bitmapConverter.BytesToImage(encrypted, size);
+            File.WriteAllBytes(file, encrypted);
         }
         private void bDecryptImg_Click(object sender, EventArgs e)
         {
             Size size = pbEncryptedImg.Image.Size;
-            byte[] bytes = bitmapConverter.ImageToBytes(new Bitmap(pbEncryptedImg.Image));
+            byte[] bytes = File.ReadAllBytes(file);
             byte[] decrypted = cipher.Decrypt(bytes);
             pbPlainImg.Image = bitmapConverter.BytesToImage(decrypted, size);
         }
@@ -79,6 +84,74 @@ namespace SymmetricBlockCiphers
         private void cbCipherMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             InitCipher();
+        }
+
+        private void bOpenPlainText_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogText.ShowDialog() == DialogResult.OK)
+            {
+                tbPlainText.Text = File.ReadAllText(openFileDialogText.FileName);
+            }
+        }
+
+        private void bOpenEncryptedText_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogText.ShowDialog() == DialogResult.OK)
+            {
+                tbEnctyptedText.Text = File.ReadAllText(openFileDialogText.FileName);
+            }
+        }
+
+        private void bSavePlainText_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialogText.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllText(saveFileDialogText.FileName, tbPlainText.Text);
+            }
+        }
+
+        private void bSaveEncryptedText_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialogText.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllText(saveFileDialogText.FileName, tbEnctyptedText.Text);
+            }
+        }
+
+        private void bSavePlainImg_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialogImg.ShowDialog() == DialogResult.OK)
+            {
+                pbPlainImg.Image.Save(saveFileDialogImg.FileName);
+            }
+        }
+
+        private void bSaveEncryptedImg_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialogImg.ShowDialog() == DialogResult.OK)
+            {
+                pbEncryptedImg.Image.Save(saveFileDialogImg.FileName);
+            }
+        }
+
+        private void bClearPlainText_Click(object sender, EventArgs e)
+        {
+            tbPlainText.Text = "";
+        }
+
+        private void bClearEnText_Click(object sender, EventArgs e)
+        {
+            tbEnctyptedText.Text = "";
+        }
+
+        private void bClearPlainImg_Click(object sender, EventArgs e)
+        {
+            pbPlainImg.Image = null;
+        }
+
+        private void bClearEnImg_Click(object sender, EventArgs e)
+        {
+            pbEncryptedImg.Image = null;
         }
     }
 }

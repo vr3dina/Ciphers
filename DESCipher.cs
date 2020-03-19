@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace SymmetricBlockCiphers
 {
@@ -18,15 +19,11 @@ namespace SymmetricBlockCiphers
 
         private byte[] CryptoTransform(ICryptoTransform trasform, byte[] data)
         {
-            using (var memoryStream = new MemoryStream())
-            {
-                using (var cryptoStream = new CryptoStream(memoryStream, trasform, CryptoStreamMode.Write))
-                {
-                    cryptoStream.Write(data, 0, data.Length);
-                    cryptoStream.FlushFinalBlock();
-                    return memoryStream.ToArray();
-                }
-            }
+            using var memoryStream = new MemoryStream();
+            using var cryptoStream = new CryptoStream(memoryStream, trasform, CryptoStreamMode.Write);
+            cryptoStream.Write(data, 0, data.Length);
+            cryptoStream.FlushFinalBlock();
+            return memoryStream.ToArray();
         }
         public byte[] Encrypt(byte[] data)
         {
@@ -39,17 +36,16 @@ namespace SymmetricBlockCiphers
 
         public string Encrypt(string data)
         {
-            byte[] bytes = Convert.FromBase64String(data);
+            byte[] bytes = Encoding.Unicode.GetBytes(data);
             byte[] encryptedBytes = Encrypt(bytes);
             return Convert.ToBase64String(encryptedBytes);
-
         }
 
         public string Decrypt(string data)
         {
             byte[] bytes = Convert.FromBase64String(data);
             byte[] decryptedBytes = Decrypt(bytes);
-            return Convert.ToBase64String(decryptedBytes);
+            return Encoding.Unicode.GetString(decryptedBytes);
         }
     }
 }

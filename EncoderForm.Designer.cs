@@ -43,6 +43,19 @@
             this.bOpenImg = new System.Windows.Forms.Button();
             this.bOpenEncryptedImg = new System.Windows.Forms.Button();
             this.openFileDialogImg = new System.Windows.Forms.OpenFileDialog();
+            this.bOpenPlainText = new System.Windows.Forms.Button();
+            this.bOpenEncryptedText = new System.Windows.Forms.Button();
+            this.openFileDialogText = new System.Windows.Forms.OpenFileDialog();
+            this.bSavePlainText = new System.Windows.Forms.Button();
+            this.bSaveEncryptedText = new System.Windows.Forms.Button();
+            this.bSavePlainImg = new System.Windows.Forms.Button();
+            this.bSaveEncryptedImg = new System.Windows.Forms.Button();
+            this.bClearPlainText = new System.Windows.Forms.Button();
+            this.bClearEnText = new System.Windows.Forms.Button();
+            this.bClearPlainImg = new System.Windows.Forms.Button();
+            this.bClearEnImg = new System.Windows.Forms.Button();
+            this.saveFileDialogText = new System.Windows.Forms.SaveFileDialog();
+            this.saveFileDialogImg = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pbPlainImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEncryptedImg)).BeginInit();
             this.SuspendLayout();
@@ -85,7 +98,6 @@
             this.cbCipherMode.Items.AddRange(new object[] {
             "CBC",
             "ECB",
-            "OFB",
             "CFB",
             "CTS"});
             this.cbCipherMode.Location = new System.Drawing.Point(501, 10);
@@ -132,7 +144,7 @@
             // 
             // pbPlainImg
             // 
-            this.pbPlainImg.Location = new System.Drawing.Point(12, 359);
+            this.pbPlainImg.Location = new System.Drawing.Point(12, 376);
             this.pbPlainImg.Name = "pbPlainImg";
             this.pbPlainImg.Size = new System.Drawing.Size(348, 279);
             this.pbPlainImg.TabIndex = 8;
@@ -140,7 +152,7 @@
             // 
             // pbEncryptedImg
             // 
-            this.pbEncryptedImg.Location = new System.Drawing.Point(491, 359);
+            this.pbEncryptedImg.Location = new System.Drawing.Point(491, 376);
             this.pbEncryptedImg.Name = "pbEncryptedImg";
             this.pbEncryptedImg.Size = new System.Drawing.Size(348, 279);
             this.pbEncryptedImg.TabIndex = 9;
@@ -148,7 +160,7 @@
             // 
             // bDecryptImg
             // 
-            this.bDecryptImg.Location = new System.Drawing.Point(379, 487);
+            this.bDecryptImg.Location = new System.Drawing.Point(379, 504);
             this.bDecryptImg.Name = "bDecryptImg";
             this.bDecryptImg.Size = new System.Drawing.Size(96, 34);
             this.bDecryptImg.TabIndex = 11;
@@ -158,7 +170,7 @@
             // 
             // bEncryptImg
             // 
-            this.bEncryptImg.Location = new System.Drawing.Point(379, 447);
+            this.bEncryptImg.Location = new System.Drawing.Point(379, 464);
             this.bEncryptImg.Name = "bEncryptImg";
             this.bEncryptImg.Size = new System.Drawing.Size(96, 34);
             this.bEncryptImg.TabIndex = 10;
@@ -168,7 +180,7 @@
             // 
             // bOpenImg
             // 
-            this.bOpenImg.Location = new System.Drawing.Point(12, 645);
+            this.bOpenImg.Location = new System.Drawing.Point(12, 662);
             this.bOpenImg.Name = "bOpenImg";
             this.bOpenImg.Size = new System.Drawing.Size(75, 23);
             this.bOpenImg.TabIndex = 12;
@@ -178,7 +190,7 @@
             // 
             // bOpenEncryptedImg
             // 
-            this.bOpenEncryptedImg.Location = new System.Drawing.Point(491, 645);
+            this.bOpenEncryptedImg.Location = new System.Drawing.Point(491, 662);
             this.bOpenEncryptedImg.Name = "bOpenEncryptedImg";
             this.bOpenEncryptedImg.Size = new System.Drawing.Size(75, 23);
             this.bOpenEncryptedImg.TabIndex = 13;
@@ -189,12 +201,138 @@
             // openFileDialogImg
             // 
             this.openFileDialogImg.FileName = "openFileDialog1";
+            this.openFileDialogImg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif;" +
+    " *.png";
+            // 
+            // bOpenPlainText
+            // 
+            this.bOpenPlainText.Location = new System.Drawing.Point(12, 338);
+            this.bOpenPlainText.Name = "bOpenPlainText";
+            this.bOpenPlainText.Size = new System.Drawing.Size(75, 23);
+            this.bOpenPlainText.TabIndex = 14;
+            this.bOpenPlainText.Text = "Open";
+            this.bOpenPlainText.UseVisualStyleBackColor = true;
+            this.bOpenPlainText.Click += new System.EventHandler(this.bOpenPlainText_Click);
+            // 
+            // bOpenEncryptedText
+            // 
+            this.bOpenEncryptedText.Location = new System.Drawing.Point(491, 338);
+            this.bOpenEncryptedText.Name = "bOpenEncryptedText";
+            this.bOpenEncryptedText.Size = new System.Drawing.Size(75, 23);
+            this.bOpenEncryptedText.TabIndex = 15;
+            this.bOpenEncryptedText.Text = "Open";
+            this.bOpenEncryptedText.UseVisualStyleBackColor = true;
+            this.bOpenEncryptedText.Click += new System.EventHandler(this.bOpenEncryptedText_Click);
+            // 
+            // openFileDialogText
+            // 
+            this.openFileDialogText.FileName = "openFileDialog1";
+            this.openFileDialogText.Filter = "Text files | *.txt";
+            // 
+            // bSavePlainText
+            // 
+            this.bSavePlainText.Location = new System.Drawing.Point(93, 338);
+            this.bSavePlainText.Name = "bSavePlainText";
+            this.bSavePlainText.Size = new System.Drawing.Size(75, 23);
+            this.bSavePlainText.TabIndex = 16;
+            this.bSavePlainText.Text = "Save";
+            this.bSavePlainText.UseVisualStyleBackColor = true;
+            this.bSavePlainText.Click += new System.EventHandler(this.bSavePlainText_Click);
+            // 
+            // bSaveEncryptedText
+            // 
+            this.bSaveEncryptedText.Location = new System.Drawing.Point(572, 338);
+            this.bSaveEncryptedText.Name = "bSaveEncryptedText";
+            this.bSaveEncryptedText.Size = new System.Drawing.Size(75, 23);
+            this.bSaveEncryptedText.TabIndex = 17;
+            this.bSaveEncryptedText.Text = "Save";
+            this.bSaveEncryptedText.UseVisualStyleBackColor = true;
+            this.bSaveEncryptedText.Click += new System.EventHandler(this.bSaveEncryptedText_Click);
+            // 
+            // bSavePlainImg
+            // 
+            this.bSavePlainImg.Location = new System.Drawing.Point(93, 662);
+            this.bSavePlainImg.Name = "bSavePlainImg";
+            this.bSavePlainImg.Size = new System.Drawing.Size(75, 23);
+            this.bSavePlainImg.TabIndex = 18;
+            this.bSavePlainImg.Text = "Save";
+            this.bSavePlainImg.UseVisualStyleBackColor = true;
+            this.bSavePlainImg.Click += new System.EventHandler(this.bSavePlainImg_Click);
+            // 
+            // bSaveEncryptedImg
+            // 
+            this.bSaveEncryptedImg.Location = new System.Drawing.Point(572, 662);
+            this.bSaveEncryptedImg.Name = "bSaveEncryptedImg";
+            this.bSaveEncryptedImg.Size = new System.Drawing.Size(75, 23);
+            this.bSaveEncryptedImg.TabIndex = 19;
+            this.bSaveEncryptedImg.Text = "Save";
+            this.bSaveEncryptedImg.UseVisualStyleBackColor = true;
+            this.bSaveEncryptedImg.Click += new System.EventHandler(this.bSaveEncryptedImg_Click);
+            // 
+            // bClearPlainText
+            // 
+            this.bClearPlainText.Location = new System.Drawing.Point(174, 338);
+            this.bClearPlainText.Name = "bClearPlainText";
+            this.bClearPlainText.Size = new System.Drawing.Size(75, 23);
+            this.bClearPlainText.TabIndex = 20;
+            this.bClearPlainText.Text = "Clear";
+            this.bClearPlainText.UseVisualStyleBackColor = true;
+            this.bClearPlainText.Click += new System.EventHandler(this.bClearPlainText_Click);
+            // 
+            // bClearEnText
+            // 
+            this.bClearEnText.Location = new System.Drawing.Point(653, 338);
+            this.bClearEnText.Name = "bClearEnText";
+            this.bClearEnText.Size = new System.Drawing.Size(75, 23);
+            this.bClearEnText.TabIndex = 21;
+            this.bClearEnText.Text = "Clear";
+            this.bClearEnText.UseVisualStyleBackColor = true;
+            this.bClearEnText.Click += new System.EventHandler(this.bClearEnText_Click);
+            // 
+            // bClearPlainImg
+            // 
+            this.bClearPlainImg.Location = new System.Drawing.Point(174, 662);
+            this.bClearPlainImg.Name = "bClearPlainImg";
+            this.bClearPlainImg.Size = new System.Drawing.Size(75, 23);
+            this.bClearPlainImg.TabIndex = 22;
+            this.bClearPlainImg.Text = "Clear";
+            this.bClearPlainImg.UseVisualStyleBackColor = true;
+            this.bClearPlainImg.Click += new System.EventHandler(this.bClearPlainImg_Click);
+            // 
+            // bClearEnImg
+            // 
+            this.bClearEnImg.Location = new System.Drawing.Point(653, 662);
+            this.bClearEnImg.Name = "bClearEnImg";
+            this.bClearEnImg.Size = new System.Drawing.Size(75, 23);
+            this.bClearEnImg.TabIndex = 23;
+            this.bClearEnImg.Text = "Clear";
+            this.bClearEnImg.UseVisualStyleBackColor = true;
+            this.bClearEnImg.Click += new System.EventHandler(this.bClearEnImg_Click);
+            // 
+            // saveFileDialogText
+            // 
+            this.saveFileDialogText.Filter = "Text files | *.txt";
+            // 
+            // saveFileDialogImg
+            // 
+            this.saveFileDialogImg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif;" +
+    " *.png";
             // 
             // EncoderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(851, 694);
+            this.Controls.Add(this.bClearEnImg);
+            this.Controls.Add(this.bClearPlainImg);
+            this.Controls.Add(this.bClearEnText);
+            this.Controls.Add(this.bClearPlainText);
+            this.Controls.Add(this.bSaveEncryptedImg);
+            this.Controls.Add(this.bSavePlainImg);
+            this.Controls.Add(this.bSaveEncryptedText);
+            this.Controls.Add(this.bSavePlainText);
+            this.Controls.Add(this.bOpenEncryptedText);
+            this.Controls.Add(this.bOpenPlainText);
             this.Controls.Add(this.bOpenEncryptedImg);
             this.Controls.Add(this.bOpenImg);
             this.Controls.Add(this.bDecryptImg);
@@ -238,6 +376,19 @@
         private System.Windows.Forms.Button bOpenImg;
         private System.Windows.Forms.Button bOpenEncryptedImg;
         private System.Windows.Forms.OpenFileDialog openFileDialogImg;
+        private System.Windows.Forms.Button bOpenPlainText;
+        private System.Windows.Forms.Button bOpenEncryptedText;
+        private System.Windows.Forms.OpenFileDialog openFileDialogText;
+        private System.Windows.Forms.Button bSavePlainText;
+        private System.Windows.Forms.Button bSaveEncryptedText;
+        private System.Windows.Forms.Button bSavePlainImg;
+        private System.Windows.Forms.Button bSaveEncryptedImg;
+        private System.Windows.Forms.Button bClearPlainText;
+        private System.Windows.Forms.Button bClearEnText;
+        private System.Windows.Forms.Button bClearPlainImg;
+        private System.Windows.Forms.Button bClearEnImg;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogText;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogImg;
     }
 }
 
