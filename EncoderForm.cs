@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 using System.Windows.Forms;
 
 namespace SymmetricBlockCiphers
@@ -9,7 +10,6 @@ namespace SymmetricBlockCiphers
     public partial class EncoderForm : Form
     {
         private ICipher cipher;
-        private CipherMode cipherMode;
         private BitmapConverter bitmapConverter;
 
         private const string file = "data.txt";
@@ -20,18 +20,20 @@ namespace SymmetricBlockCiphers
             cbCipherMode.SelectedIndex = 0;
             cbCipher.SelectedIndex = 0;
             bitmapConverter = new BitmapConverter();
-
         }
 
         private void InitCipher()
         {
-            cipherMode = (CipherMode)Enum.Parse(typeof(CipherMode), cbCipherMode.SelectedItem.ToString());
+            byte[] key = Encoding.Unicode.GetBytes(tbKey.Text);
+            byte[] IV = Encoding.Unicode.GetBytes(tbIV.Text);
+            CipherMode cipherMode = (CipherMode)Enum.Parse(typeof(CipherMode), cbCipherMode.SelectedItem.ToString());
             if (cbCipher.SelectedItem?.ToString() == "DES")
-                cipher = new DESCipher(cipherMode);
+                cipher = new DESCipher(cipherMode, key, IV);
         }
 
         private void bEncrypt_Click(object sender, EventArgs e)
         {
+            InitCipher();
             //var bytes = cipher.Encrypt(tbDecodedText.Text);
             //var decrypted = cipher.Decrypt(bytes);
 
@@ -40,6 +42,7 @@ namespace SymmetricBlockCiphers
 
         private void bDecrypt_Click(object sender, EventArgs e)
         {
+            InitCipher();
             tbPlainText.Text = cipher.Decrypt(tbEnctyptedText.Text);
         }
 
@@ -62,6 +65,7 @@ namespace SymmetricBlockCiphers
 
         private void bEncryptImg_Click(object sender, EventArgs e)
         {
+            InitCipher();
             Size size = pbPlainImg.Image.Size;
             byte[] bytes = bitmapConverter.ImageToBytes(new Bitmap(pbPlainImg.Image));
             byte[] encrypted = cipher.Encrypt(bytes);
@@ -70,20 +74,11 @@ namespace SymmetricBlockCiphers
         }
         private void bDecryptImg_Click(object sender, EventArgs e)
         {
+            InitCipher();
             Size size = pbEncryptedImg.Image.Size;
             byte[] bytes = File.ReadAllBytes(file);
             byte[] decrypted = cipher.Decrypt(bytes);
             pbPlainImg.Image = bitmapConverter.BytesToImage(decrypted, size);
-        }
-
-        private void cbCipher_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            InitCipher();
-        }
-
-        private void cbCipherMode_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            InitCipher();
         }
 
         private void bOpenPlainText_Click(object sender, EventArgs e)

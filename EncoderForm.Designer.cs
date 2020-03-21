@@ -56,6 +56,10 @@
             this.bClearEnImg = new System.Windows.Forms.Button();
             this.saveFileDialogText = new System.Windows.Forms.SaveFileDialog();
             this.saveFileDialogImg = new System.Windows.Forms.SaveFileDialog();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbKey = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbIV = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbPlainImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEncryptedImg)).BeginInit();
             this.SuspendLayout();
@@ -80,12 +84,11 @@
             this.cbCipher.Name = "cbCipher";
             this.cbCipher.Size = new System.Drawing.Size(121, 21);
             this.cbCipher.TabIndex = 1;
-            this.cbCipher.SelectedIndexChanged += new System.EventHandler(this.cbCipher_SelectedIndexChanged);
             // 
             // l_cipherMode
             // 
             this.l_cipherMode.AutoSize = true;
-            this.l_cipherMode.Location = new System.Drawing.Point(419, 13);
+            this.l_cipherMode.Location = new System.Drawing.Point(214, 13);
             this.l_cipherMode.Name = "l_cipherMode";
             this.l_cipherMode.Size = new System.Drawing.Size(76, 15);
             this.l_cipherMode.TabIndex = 2;
@@ -100,11 +103,10 @@
             "ECB",
             "CFB",
             "CTS"});
-            this.cbCipherMode.Location = new System.Drawing.Point(501, 10);
+            this.cbCipherMode.Location = new System.Drawing.Point(296, 10);
             this.cbCipherMode.Name = "cbCipherMode";
             this.cbCipherMode.Size = new System.Drawing.Size(121, 21);
             this.cbCipherMode.TabIndex = 3;
-            this.cbCipherMode.SelectedIndexChanged += new System.EventHandler(this.cbCipherMode_SelectedIndexChanged);
             // 
             // tbPlainText
             // 
@@ -318,11 +320,47 @@
             this.saveFileDialogImg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif;" +
     " *.png";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(435, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(25, 15);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "key";
+            // 
+            // tbKey
+            // 
+            this.tbKey.Location = new System.Drawing.Point(467, 13);
+            this.tbKey.Name = "tbKey";
+            this.tbKey.Size = new System.Drawing.Size(100, 20);
+            this.tbKey.TabIndex = 25;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(585, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(17, 15);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "IV";
+            // 
+            // tbIV
+            // 
+            this.tbIV.Location = new System.Drawing.Point(608, 13);
+            this.tbIV.Name = "tbIV";
+            this.tbIV.Size = new System.Drawing.Size(100, 20);
+            this.tbIV.TabIndex = 27;
+            // 
             // EncoderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(851, 694);
+            this.Controls.Add(this.tbIV);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.tbKey);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.bClearEnImg);
             this.Controls.Add(this.bClearPlainImg);
             this.Controls.Add(this.bClearEnText);
@@ -351,7 +389,7 @@
             this.MaximizeBox = false;
             this.Name = "EncoderForm";
             this.ShowIcon = false;
-            this.Text = "EncoderDecoder";
+            this.Text = "Encryptor";
             ((System.ComponentModel.ISupportInitialize)(this.pbPlainImg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEncryptedImg)).EndInit();
             this.ResumeLayout(false);
@@ -389,6 +427,10 @@
         private System.Windows.Forms.Button bClearEnImg;
         private System.Windows.Forms.SaveFileDialog saveFileDialogText;
         private System.Windows.Forms.SaveFileDialog saveFileDialogImg;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbKey;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tbIV;
     }
 }
 
