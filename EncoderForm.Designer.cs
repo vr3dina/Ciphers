@@ -60,6 +60,10 @@
             this.tbKey = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tbIV = new System.Windows.Forms.TextBox();
+            this.bOpenKey = new System.Windows.Forms.Button();
+            this.bSaveKey = new System.Windows.Forms.Button();
+            this.saveFileDialogKey = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialogKey = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pbPlainImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEncryptedImg)).BeginInit();
             this.SuspendLayout();
@@ -110,7 +114,7 @@
             // 
             // tbPlainText
             // 
-            this.tbPlainText.Location = new System.Drawing.Point(12, 53);
+            this.tbPlainText.Location = new System.Drawing.Point(14, 97);
             this.tbPlainText.Multiline = true;
             this.tbPlainText.Name = "tbPlainText";
             this.tbPlainText.Size = new System.Drawing.Size(348, 279);
@@ -118,7 +122,7 @@
             // 
             // tbEnctyptedText
             // 
-            this.tbEnctyptedText.Location = new System.Drawing.Point(491, 53);
+            this.tbEnctyptedText.Location = new System.Drawing.Point(493, 97);
             this.tbEnctyptedText.Multiline = true;
             this.tbEnctyptedText.Name = "tbEnctyptedText";
             this.tbEnctyptedText.Size = new System.Drawing.Size(348, 279);
@@ -126,7 +130,7 @@
             // 
             // bEncrypt
             // 
-            this.bEncrypt.Location = new System.Drawing.Point(379, 125);
+            this.bEncrypt.Location = new System.Drawing.Point(381, 169);
             this.bEncrypt.Name = "bEncrypt";
             this.bEncrypt.Size = new System.Drawing.Size(96, 34);
             this.bEncrypt.TabIndex = 6;
@@ -136,7 +140,7 @@
             // 
             // bDecrypt
             // 
-            this.bDecrypt.Location = new System.Drawing.Point(379, 165);
+            this.bDecrypt.Location = new System.Drawing.Point(381, 209);
             this.bDecrypt.Name = "bDecrypt";
             this.bDecrypt.Size = new System.Drawing.Size(96, 34);
             this.bDecrypt.TabIndex = 7;
@@ -146,7 +150,7 @@
             // 
             // pbPlainImg
             // 
-            this.pbPlainImg.Location = new System.Drawing.Point(12, 376);
+            this.pbPlainImg.Location = new System.Drawing.Point(14, 420);
             this.pbPlainImg.Name = "pbPlainImg";
             this.pbPlainImg.Size = new System.Drawing.Size(348, 279);
             this.pbPlainImg.TabIndex = 8;
@@ -154,7 +158,7 @@
             // 
             // pbEncryptedImg
             // 
-            this.pbEncryptedImg.Location = new System.Drawing.Point(491, 376);
+            this.pbEncryptedImg.Location = new System.Drawing.Point(493, 420);
             this.pbEncryptedImg.Name = "pbEncryptedImg";
             this.pbEncryptedImg.Size = new System.Drawing.Size(348, 279);
             this.pbEncryptedImg.TabIndex = 9;
@@ -162,7 +166,7 @@
             // 
             // bDecryptImg
             // 
-            this.bDecryptImg.Location = new System.Drawing.Point(379, 504);
+            this.bDecryptImg.Location = new System.Drawing.Point(381, 548);
             this.bDecryptImg.Name = "bDecryptImg";
             this.bDecryptImg.Size = new System.Drawing.Size(96, 34);
             this.bDecryptImg.TabIndex = 11;
@@ -172,7 +176,7 @@
             // 
             // bEncryptImg
             // 
-            this.bEncryptImg.Location = new System.Drawing.Point(379, 464);
+            this.bEncryptImg.Location = new System.Drawing.Point(381, 508);
             this.bEncryptImg.Name = "bEncryptImg";
             this.bEncryptImg.Size = new System.Drawing.Size(96, 34);
             this.bEncryptImg.TabIndex = 10;
@@ -182,7 +186,7 @@
             // 
             // bOpenImg
             // 
-            this.bOpenImg.Location = new System.Drawing.Point(12, 662);
+            this.bOpenImg.Location = new System.Drawing.Point(14, 706);
             this.bOpenImg.Name = "bOpenImg";
             this.bOpenImg.Size = new System.Drawing.Size(75, 23);
             this.bOpenImg.TabIndex = 12;
@@ -192,7 +196,7 @@
             // 
             // bOpenEncryptedImg
             // 
-            this.bOpenEncryptedImg.Location = new System.Drawing.Point(491, 662);
+            this.bOpenEncryptedImg.Location = new System.Drawing.Point(493, 706);
             this.bOpenEncryptedImg.Name = "bOpenEncryptedImg";
             this.bOpenEncryptedImg.Size = new System.Drawing.Size(75, 23);
             this.bOpenEncryptedImg.TabIndex = 13;
@@ -208,7 +212,7 @@
             // 
             // bOpenPlainText
             // 
-            this.bOpenPlainText.Location = new System.Drawing.Point(12, 338);
+            this.bOpenPlainText.Location = new System.Drawing.Point(14, 382);
             this.bOpenPlainText.Name = "bOpenPlainText";
             this.bOpenPlainText.Size = new System.Drawing.Size(75, 23);
             this.bOpenPlainText.TabIndex = 14;
@@ -218,7 +222,7 @@
             // 
             // bOpenEncryptedText
             // 
-            this.bOpenEncryptedText.Location = new System.Drawing.Point(491, 338);
+            this.bOpenEncryptedText.Location = new System.Drawing.Point(493, 382);
             this.bOpenEncryptedText.Name = "bOpenEncryptedText";
             this.bOpenEncryptedText.Size = new System.Drawing.Size(75, 23);
             this.bOpenEncryptedText.TabIndex = 15;
@@ -233,7 +237,7 @@
             // 
             // bSavePlainText
             // 
-            this.bSavePlainText.Location = new System.Drawing.Point(93, 338);
+            this.bSavePlainText.Location = new System.Drawing.Point(95, 382);
             this.bSavePlainText.Name = "bSavePlainText";
             this.bSavePlainText.Size = new System.Drawing.Size(75, 23);
             this.bSavePlainText.TabIndex = 16;
@@ -243,7 +247,7 @@
             // 
             // bSaveEncryptedText
             // 
-            this.bSaveEncryptedText.Location = new System.Drawing.Point(572, 338);
+            this.bSaveEncryptedText.Location = new System.Drawing.Point(574, 382);
             this.bSaveEncryptedText.Name = "bSaveEncryptedText";
             this.bSaveEncryptedText.Size = new System.Drawing.Size(75, 23);
             this.bSaveEncryptedText.TabIndex = 17;
@@ -253,7 +257,7 @@
             // 
             // bSavePlainImg
             // 
-            this.bSavePlainImg.Location = new System.Drawing.Point(93, 662);
+            this.bSavePlainImg.Location = new System.Drawing.Point(95, 706);
             this.bSavePlainImg.Name = "bSavePlainImg";
             this.bSavePlainImg.Size = new System.Drawing.Size(75, 23);
             this.bSavePlainImg.TabIndex = 18;
@@ -263,7 +267,7 @@
             // 
             // bSaveEncryptedImg
             // 
-            this.bSaveEncryptedImg.Location = new System.Drawing.Point(572, 662);
+            this.bSaveEncryptedImg.Location = new System.Drawing.Point(574, 706);
             this.bSaveEncryptedImg.Name = "bSaveEncryptedImg";
             this.bSaveEncryptedImg.Size = new System.Drawing.Size(75, 23);
             this.bSaveEncryptedImg.TabIndex = 19;
@@ -273,7 +277,7 @@
             // 
             // bClearPlainText
             // 
-            this.bClearPlainText.Location = new System.Drawing.Point(174, 338);
+            this.bClearPlainText.Location = new System.Drawing.Point(176, 382);
             this.bClearPlainText.Name = "bClearPlainText";
             this.bClearPlainText.Size = new System.Drawing.Size(75, 23);
             this.bClearPlainText.TabIndex = 20;
@@ -283,7 +287,7 @@
             // 
             // bClearEnText
             // 
-            this.bClearEnText.Location = new System.Drawing.Point(653, 338);
+            this.bClearEnText.Location = new System.Drawing.Point(655, 382);
             this.bClearEnText.Name = "bClearEnText";
             this.bClearEnText.Size = new System.Drawing.Size(75, 23);
             this.bClearEnText.TabIndex = 21;
@@ -293,7 +297,7 @@
             // 
             // bClearPlainImg
             // 
-            this.bClearPlainImg.Location = new System.Drawing.Point(174, 662);
+            this.bClearPlainImg.Location = new System.Drawing.Point(176, 706);
             this.bClearPlainImg.Name = "bClearPlainImg";
             this.bClearPlainImg.Size = new System.Drawing.Size(75, 23);
             this.bClearPlainImg.TabIndex = 22;
@@ -303,7 +307,7 @@
             // 
             // bClearEnImg
             // 
-            this.bClearEnImg.Location = new System.Drawing.Point(653, 662);
+            this.bClearEnImg.Location = new System.Drawing.Point(655, 706);
             this.bClearEnImg.Name = "bClearEnImg";
             this.bClearEnImg.Size = new System.Drawing.Size(75, 23);
             this.bClearEnImg.TabIndex = 23;
@@ -323,7 +327,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(435, 13);
+            this.label1.Location = new System.Drawing.Point(13, 49);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(25, 15);
             this.label1.TabIndex = 24;
@@ -331,15 +335,15 @@
             // 
             // tbKey
             // 
-            this.tbKey.Location = new System.Drawing.Point(467, 13);
+            this.tbKey.Location = new System.Drawing.Point(45, 49);
             this.tbKey.Name = "tbKey";
-            this.tbKey.Size = new System.Drawing.Size(100, 20);
+            this.tbKey.Size = new System.Drawing.Size(150, 20);
             this.tbKey.TabIndex = 25;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(585, 13);
+            this.label2.Location = new System.Drawing.Point(214, 49);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(17, 15);
             this.label2.TabIndex = 26;
@@ -347,16 +351,47 @@
             // 
             // tbIV
             // 
-            this.tbIV.Location = new System.Drawing.Point(608, 13);
+            this.tbIV.Location = new System.Drawing.Point(237, 49);
             this.tbIV.Name = "tbIV";
-            this.tbIV.Size = new System.Drawing.Size(100, 20);
+            this.tbIV.Size = new System.Drawing.Size(180, 20);
             this.tbIV.TabIndex = 27;
+            // 
+            // bOpenKey
+            // 
+            this.bOpenKey.Location = new System.Drawing.Point(449, 13);
+            this.bOpenKey.Name = "bOpenKey";
+            this.bOpenKey.Size = new System.Drawing.Size(75, 23);
+            this.bOpenKey.TabIndex = 28;
+            this.bOpenKey.Text = "Open";
+            this.bOpenKey.UseVisualStyleBackColor = true;
+            this.bOpenKey.Click += new System.EventHandler(this.bOpenKey_Click);
+            // 
+            // bSaveKey
+            // 
+            this.bSaveKey.Location = new System.Drawing.Point(449, 49);
+            this.bSaveKey.Name = "bSaveKey";
+            this.bSaveKey.Size = new System.Drawing.Size(75, 23);
+            this.bSaveKey.TabIndex = 29;
+            this.bSaveKey.Text = "Save";
+            this.bSaveKey.UseVisualStyleBackColor = true;
+            this.bSaveKey.Click += new System.EventHandler(this.bSaveKey_Click);
+            // 
+            // saveFileDialogKey
+            // 
+            this.saveFileDialogKey.Filter = "xml file | *.xml";
+            // 
+            // openFileDialogKey
+            // 
+            this.openFileDialogKey.FileName = "openFileDialog1";
+            this.openFileDialogKey.Filter = "xml file | *.xml";
             // 
             // EncoderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(851, 694);
+            this.ClientSize = new System.Drawing.Size(851, 736);
+            this.Controls.Add(this.bSaveKey);
+            this.Controls.Add(this.bOpenKey);
             this.Controls.Add(this.tbIV);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbKey);
@@ -431,6 +466,10 @@
         private System.Windows.Forms.TextBox tbKey;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbIV;
+        private System.Windows.Forms.Button bOpenKey;
+        private System.Windows.Forms.Button bSaveKey;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogKey;
+        private System.Windows.Forms.OpenFileDialog openFileDialogKey;
     }
 }
 

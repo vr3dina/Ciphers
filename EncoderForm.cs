@@ -4,6 +4,8 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace SymmetricBlockCiphers
 {
@@ -147,6 +149,45 @@ namespace SymmetricBlockCiphers
         private void bClearEnImg_Click(object sender, EventArgs e)
         {
             pbEncryptedImg.Image = null;
+        }
+
+        private void bSaveKey_Click(object sender, EventArgs e)
+        {
+            XElement cipherInfo =
+                new XElement("Cipher_Info",
+                    new XElement("cipher", cbCipher.SelectedItem.ToString()),
+                    new XElement("cipher_mode", cbCipherMode.SelectedItem.ToString()),
+                    new XElement("key", tbKey.Text),
+                    new XElement("IV", tbIV.Text));
+
+            if (saveFileDialogKey.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllText(saveFileDialogKey.FileName, cipherInfo.ToString());
+            }
+        }
+
+        private void bOpenKey_Click(object sender, EventArgs e)
+        {
+            XmlDocument xDoc = new XmlDocument();
+            if (openFileDialogKey.ShowDialog() == DialogResult.OK)
+            {
+                xDoc.Load(openFileDialogKey.FileName);
+                XmlNodeList xnodeList = xDoc.DocumentElement.ChildNodes;
+                foreach (XmlNode node in xnodeList)
+                {
+                    if (node.Name == "cipher")
+                        cbCipher.SelectedItem = node.InnerText;
+
+                    if (node.Name == "cipher_mode")
+                        cbCipherMode.SelectedItem = node.InnerText;
+
+                    if (node.Name == "key")
+                        tbKey.Text = node.InnerText;
+
+                    if (node.Name == "IV")
+                        tbIV.Text= node.InnerText;
+                }
+            }
         }
     }
 }

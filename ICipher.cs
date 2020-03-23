@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SymmetricBlockCiphers
+﻿namespace SymmetricBlockCiphers
 {
     public interface ICipher
     {
@@ -13,7 +7,5 @@ namespace SymmetricBlockCiphers
 
         string Encrypt(string data);
         string Decrypt(string data);
-
-
     }
 }

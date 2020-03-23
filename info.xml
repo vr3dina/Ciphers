@@ -1,0 +1,6 @@
+<Cipher_Info>
+  <cipher>AES</cipher>
+  <cipher_mode>CFB</cipher_mode>
+  <key>1234</key>
+  <IV>123456</IV>
+</Cipher_Info>
