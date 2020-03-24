@@ -1,6 +1,6 @@
 ﻿namespace SymmetricBlockCiphers
 {
-    partial class EncoderForm
+    partial class EncryptorForm
     {
         /// <summary>
         /// Required designer variable.

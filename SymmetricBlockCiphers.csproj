@@ -48,19 +48,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AESCipher.cs" />
     <Compile Include="BitmapConverter.cs" />
     <Compile Include="DESCipher.cs" />
-    <Compile Include="EncoderForm.cs">
+    <Compile Include="EncryptorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EncoderForm.Designer.cs">
-      <DependentUpon>EncoderForm.cs</DependentUpon>
+    <Compile Include="EncryptorForm.Designer.cs">
+      <DependentUpon>EncryptorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ICipher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="EncoderForm.resx">
-      <DependentUpon>EncoderForm.cs</DependentUpon>
+    <Compile Include="CryptoHelper.cs" />
+    <EmbeddedResource Include="EncryptorForm.resx">
+      <DependentUpon>EncryptorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

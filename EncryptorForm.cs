@@ -9,14 +9,14 @@ using System.Xml.Linq;
 
 namespace SymmetricBlockCiphers
 {
-    public partial class EncoderForm : Form
+    public partial class EncryptorForm : Form
     {
         private ICipher cipher;
         private BitmapConverter bitmapConverter;
 
         private const string file = "data.txt";
 
-        public EncoderForm()
+        public EncryptorForm()
         {
             InitializeComponent();
             cbCipherMode.SelectedIndex = 0;
@@ -31,21 +31,26 @@ namespace SymmetricBlockCiphers
             CipherMode cipherMode = (CipherMode)Enum.Parse(typeof(CipherMode), cbCipherMode.SelectedItem.ToString());
             if (cbCipher.SelectedItem?.ToString() == "DES")
                 cipher = new DESCipher(cipherMode, key, IV);
+            if (cbCipher.SelectedItem?.ToString() == "AES")
+                cipher = new AESCipher(cipherMode, key, IV);
         }
 
         private void bEncrypt_Click(object sender, EventArgs e)
         {
             InitCipher();
-            //var bytes = cipher.Encrypt(tbDecodedText.Text);
-            //var decrypted = cipher.Decrypt(bytes);
 
-            tbEnctyptedText.Text = cipher.Encrypt(tbPlainText.Text);
+            byte[] bytes = Encoding.Unicode.GetBytes(tbPlainText.Text);
+            byte[] encryptedBytes = cipher.Encrypt(bytes);
+            tbEnctyptedText.Text = Convert.ToBase64String(encryptedBytes);
         }
 
         private void bDecrypt_Click(object sender, EventArgs e)
         {
             InitCipher();
-            tbPlainText.Text = cipher.Decrypt(tbEnctyptedText.Text);
+
+            byte[] bytes = Convert.FromBase64String(tbEnctyptedText.Text);
+            byte[] decryptedBytes = cipher.Decrypt(bytes);
+            tbPlainText.Text = Encoding.Unicode.GetString(decryptedBytes);
         }
 
         private void bOpenImg_Click(object sender, EventArgs e)
