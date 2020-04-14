@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Ciphers.CipherProvider;
+using System;
 using System.Drawing;
 using System.IO;
-using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Linq;
 
-namespace SymmetricBlockCiphers
+namespace Ciphers
 {
     public partial class EncryptorForm : Form
     {
+        private ICipherProvider cipherProvider;
         private ICipher cipher;
         private BitmapConverter bitmapConverter;
 
@@ -19,38 +18,44 @@ namespace SymmetricBlockCiphers
         public EncryptorForm()
         {
             InitializeComponent();
-            cbCipherMode.SelectedIndex = 0;
             cbCipher.SelectedIndex = 0;
             bitmapConverter = new BitmapConverter();
         }
 
         private void InitCipher()
         {
-            byte[] key = Encoding.Unicode.GetBytes(tbKey.Text);
-            byte[] IV = Encoding.Unicode.GetBytes(tbIV.Text);
-            CipherMode cipherMode = (CipherMode)Enum.Parse(typeof(CipherMode), cbCipherMode.SelectedItem.ToString());
-            if (cbCipher.SelectedItem?.ToString() == "DES")
-                cipher = new DESCipher(cipherMode, key, IV);
-            if (cbCipher.SelectedItem?.ToString() == "AES")
-                cipher = new AESCipher(cipherMode, key, IV);
+            cipher = cipherProvider.Create();
+            lError.Text = "";
         }
 
         private void bEncrypt_Click(object sender, EventArgs e)
         {
-            InitCipher();
-
-            byte[] bytes = Encoding.Unicode.GetBytes(tbPlainText.Text);
-            byte[] encryptedBytes = cipher.Encrypt(bytes);
-            tbEnctyptedText.Text = Convert.ToBase64String(encryptedBytes);
+            try
+            {
+                InitCipher();
+                byte[] bytes = Encoding.Unicode.GetBytes(tbPlainText.Text);
+                byte[] encryptedBytes = cipher.Encrypt(bytes);
+                tbEnctyptedText.Text = Convert.ToBase64String(encryptedBytes);
+            }
+            catch (Exception ex)
+            {
+                lError.Text = ex.Message;
+            }
         }
 
         private void bDecrypt_Click(object sender, EventArgs e)
         {
-            InitCipher();
-
-            byte[] bytes = Convert.FromBase64String(tbEnctyptedText.Text);
-            byte[] decryptedBytes = cipher.Decrypt(bytes);
-            tbPlainText.Text = Encoding.Unicode.GetString(decryptedBytes);
+            try
+            {
+                InitCipher();
+                byte[] bytes = Convert.FromBase64String(tbEnctyptedText.Text);
+                byte[] decryptedBytes = cipher.Decrypt(bytes);
+                tbPlainText.Text = Encoding.Unicode.GetString(decryptedBytes);
+            }
+            catch (Exception ex)
+            {
+                lError.Text = ex.Message;
+            }
         }
 
         private void bOpenImg_Click(object sender, EventArgs e)
@@ -67,25 +72,40 @@ namespace SymmetricBlockCiphers
             {
                 pbEncryptedImg.Image = Image.FromFile(openFileDialogImg.FileName);
             }
-
         }
 
         private void bEncryptImg_Click(object sender, EventArgs e)
         {
-            InitCipher();
-            Size size = pbPlainImg.Image.Size;
-            byte[] bytes = bitmapConverter.ImageToBytes(new Bitmap(pbPlainImg.Image));
-            byte[] encrypted = cipher.Encrypt(bytes);
-            pbEncryptedImg.Image = bitmapConverter.BytesToImage(encrypted, size);
-            File.WriteAllBytes(file, encrypted);
+            try
+            {
+                InitCipher();
+                Size size = pbPlainImg.Image.Size;
+                byte[] bytes = bitmapConverter.ImageToBytes(new Bitmap(pbPlainImg.Image));
+                byte[] encrypted = cipher.Encrypt(bytes);
+                pbEncryptedImg.Image = bitmapConverter.BytesToImage(encrypted, size);
+                File.WriteAllBytes(file, encrypted);
+            }
+            catch (Exception ex)
+            {
+                lError.Text = ex.Message;
+            }
+
         }
         private void bDecryptImg_Click(object sender, EventArgs e)
         {
-            InitCipher();
-            Size size = pbEncryptedImg.Image.Size;
-            byte[] bytes = File.ReadAllBytes(file);
-            byte[] decrypted = cipher.Decrypt(bytes);
-            pbPlainImg.Image = bitmapConverter.BytesToImage(decrypted, size);
+            try
+            {
+                InitCipher();
+                Size size = pbEncryptedImg.Image.Size;
+                byte[] bytes = File.ReadAllBytes(file);
+                byte[] decrypted = cipher.Decrypt(bytes);
+                pbPlainImg.Image = bitmapConverter.BytesToImage(decrypted, size);
+            }
+            catch (Exception ex)
+            {
+                lError.Text = ex.Message;
+            }
+
         }
 
         private void bOpenPlainText_Click(object sender, EventArgs e)
@@ -158,41 +178,50 @@ namespace SymmetricBlockCiphers
 
         private void bSaveKey_Click(object sender, EventArgs e)
         {
-            XElement cipherInfo =
-                new XElement("Cipher_Info",
-                    new XElement("cipher", cbCipher.SelectedItem.ToString()),
-                    new XElement("cipher_mode", cbCipherMode.SelectedItem.ToString()),
-                    new XElement("key", tbKey.Text),
-                    new XElement("IV", tbIV.Text));
-
             if (saveFileDialogKey.ShowDialog() == DialogResult.OK)
             {
-                File.WriteAllText(saveFileDialogKey.FileName, cipherInfo.ToString());
+                cipherProvider.SaveCipherParameters(saveFileDialogKey.FileName);
             }
         }
 
         private void bOpenKey_Click(object sender, EventArgs e)
         {
-            XmlDocument xDoc = new XmlDocument();
             if (openFileDialogKey.ShowDialog() == DialogResult.OK)
             {
-                xDoc.Load(openFileDialogKey.FileName);
-                XmlNodeList xnodeList = xDoc.DocumentElement.ChildNodes;
-                foreach (XmlNode node in xnodeList)
-                {
-                    if (node.Name == "cipher")
-                        cbCipher.SelectedItem = node.InnerText;
-
-                    if (node.Name == "cipher_mode")
-                        cbCipherMode.SelectedItem = node.InnerText;
-
-                    if (node.Name == "key")
-                        tbKey.Text = node.InnerText;
-
-                    if (node.Name == "IV")
-                        tbIV.Text= node.InnerText;
-                }
+                cipherProvider.OpenCipherParameters(openFileDialogKey.FileName);
             }
+        }
+
+        private void cbCipher_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lError.Text = "";
+            switch (cbCipher.SelectedItem.ToString())
+            {
+                case "DES":
+                    cipherProvider = new DESProvider();
+                    ((Control)tabPageImgEncryption).Enabled = true;
+                    break;
+                case "AES":
+                    cipherProvider = new AESProvider();
+                    ((Control)tabPageImgEncryption).Enabled = true;
+                    break;
+                case "Knapsack":
+                    cipherProvider = new KnapsackCipherProvider();
+                    ((Control)tabPageImgEncryption).Enabled = false;
+                    break;
+                case "RSA":
+                    cipherProvider = new RSAProvider();
+                    ((Control)tabPageImgEncryption).Enabled = false;
+                    break;
+                case "RSADotNet":
+                    cipherProvider = new RSADotNetProvider();
+                    ((Control)tabPageImgEncryption).Enabled = false;
+                    break;
+                default:
+                    break;
+            }
+            gbCipherParameters.Controls.Clear();
+            gbCipherParameters.Controls.AddRange(cipherProvider.GenerateUI());
         }
     }
 }

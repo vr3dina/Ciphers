@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{296908E5-C827-44E9-8FB4-81E87AC14EDA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>SymmetricBlockCiphers</RootNamespace>
-    <AssemblyName>SymmetricBlockCiphers</AssemblyName>
+    <RootNamespace>Ciphers</RootNamespace>
+    <AssemblyName>Ciphers</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,9 +49,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AESCipher.cs" />
+    <Compile Include="AsymmetricCiphers\KnapsackCryptosystem.cs" />
+    <Compile Include="AsymmetricCiphers\RSA.cs" />
+    <Compile Include="AsymmetricCiphers\RSADotNet.cs" />
+    <Compile Include="BigIntegerExtensions.cs" />
+    <Compile Include="CipherProvider\AESProvider.cs" />
+    <Compile Include="CipherProvider\CipherProvider.cs" />
+    <Compile Include="CipherProvider\DESProvider.cs" />
+    <Compile Include="CipherProvider\ICipherProvider.cs" />
+    <Compile Include="CipherProvider\KnapsackCipherProvider.cs" />
+    <Compile Include="CipherProvider\RSADotNetProvider.cs" />
+    <Compile Include="CipherProvider\RSAProvider.cs" />
+    <Compile Include="CipherProvider\SymmetricCipherProvider.cs" />
+    <Compile Include="SymmetricCiphers\AESCipher.cs" />
     <Compile Include="BitmapConverter.cs" />
-    <Compile Include="DESCipher.cs" />
+    <Compile Include="SymmetricCiphers\DESCipher.cs" />
     <Compile Include="EncryptorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +85,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -86,5 +100,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

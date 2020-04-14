@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace SymmetricBlockCiphers
+namespace Ciphers.SymmetricCiphers
 {
     class AESCipher : ICipher
     {

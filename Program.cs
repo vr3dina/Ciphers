@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace SymmetricBlockCiphers
+namespace Ciphers
 {
     static class Program
     {

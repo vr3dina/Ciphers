@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace SymmetricBlockCiphers
+namespace Ciphers
 {
     public class BitmapConverter
     {

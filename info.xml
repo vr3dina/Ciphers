@@ -1,6 +1,4 @@
 <Cipher_Info>
-  <cipher>AES</cipher>
-  <cipher_mode>CFB</cipher_mode>
-  <key>1234</key>
-  <IV>123456</IV>
+  <private_key>2 3 6 13 27 54 200 556 2345</private_key>
+  <public_key>62 93 186 403 837 1674 2992 1196 2119</public_key>
 </Cipher_Info>

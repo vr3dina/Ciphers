@@ -1,4 +1,4 @@
-﻿namespace SymmetricBlockCiphers
+﻿namespace Ciphers
 {
     public interface ICipher
     {
