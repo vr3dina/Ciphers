@@ -9,7 +9,7 @@ Windows forms application for encrypt and decrypt text with symmetric and asymme
 * KnapsackCryptosystem
 * RSA
 
-## Feautes
+## Features
 * Encrypting text and images with symmetric ciphers;
 * Encrypting text with asymmetric ciphers;
 * Load text to (d)encrypt from file; save (d)encrypted text to file;
